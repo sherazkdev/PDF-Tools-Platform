@@ -29,6 +29,7 @@ build/
 # User documents & conversion I/O (never commit)
 uploads/
 var/storage/
+**/var/storage/
 tmp/
 *.pdf
 !tests/fixtures/**
