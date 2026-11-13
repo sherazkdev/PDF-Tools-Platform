@@ -1,20 +1,15 @@
 # Conversion engine matrix
 
-Planned engines (not installed until the relevant phase). License and maintenance reviewed before adoption.
+| Tool | Engine | Version (local) | License | Status |
+|------|--------|-------------------|---------|--------|
+| **JPG to PDF** | img2pdf (+ PikePDF dep), Pillow validation, pypdf verify | img2pdf 0.5.1, Pillow 11.3.0, pypdf 6.21.4 | LGPL/MIT-style stack — review PikePDF for deploy | **Quality verified** |
+| Word to PDF | LibreOffice (planned) | — | — | Planned |
+| PDF to JPG | pypdfium2/Pillow (planned) | — | — | Planned |
+| … | | | | |
 
-| Tool | Planned engine(s) | License notes | Phase |
-|------|-------------------|---------------|-------|
-| JPG to PDF | Pillow, img2pdf | Permissive | 3 |
-| Word to PDF | LibreOffice headless | MPL/LGPL ecosystem | 5 |
-| PowerPoint to PDF | LibreOffice headless | Same | 5 |
-| Excel to PDF | LibreOffice headless | Same | 5 |
-| HTML to PDF | Playwright Chromium | Browser deps; URL gated | 6 |
-| PDF to JPG | pypdfium2 / Pillow | Check MuPDF linkage | 4 |
-| PDF to Word | TBD (pdf2docx eval.) | Maintenance concern | 7 |
-| PDF to PowerPoint | TBD / document gap | May block production | 9 |
-| PDF to Excel | pdfplumber + openpyxl | Permissive | 8 |
-| PDF to PDF/A | veraPDF + converter TBD | Validator required | 10 |
+### JPG to PDF notes
 
-**AGPL caution:** Avoid MuPDF/Ghostscript-derived stacks in proprietary deployment without legal review.
-
-**System binaries (not yet installed locally):** LibreOffice, veraPDF, Playwright browsers.
+- **Fit mode:** native JPEG embed via img2pdf when no EXIF rewrite required.
+- **A4/Letter:** `FitMode.into` + margin borders in PDF points (18/36/72 pt).
+- **EXIF:** `ImageOps.exif_transpose`; re-save at quality 95 when rotation/non-RGB.
+- **Not claimed:** bit-perfect lossless for every file.

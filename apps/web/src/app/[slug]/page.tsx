@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { robotsForTool } from "@/lib/seo-indexing";
 import { getToolBySlug, tools } from "@/lib/tools";
 
 interface ToolPageProps {
@@ -9,7 +10,9 @@ interface ToolPageProps {
 }
 
 export function generateStaticParams() {
-  return tools.map((tool) => ({ slug: tool.slug }));
+  return tools
+    .filter((tool) => tool.slug !== "jpg-to-pdf")
+    .map((tool) => ({ slug: tool.slug }));
 }
 
 export async function generateMetadata({ params }: ToolPageProps): Promise<Metadata> {
@@ -30,9 +33,7 @@ export async function generateMetadata({ params }: ToolPageProps): Promise<Metad
       description: tool.metaDescription,
       url: `/${tool.slug}`,
     },
-    robots: tool.indexable
-      ? { index: true, follow: true }
-      : { index: false, follow: false },
+    robots: robotsForTool(tool),
   };
 }
 

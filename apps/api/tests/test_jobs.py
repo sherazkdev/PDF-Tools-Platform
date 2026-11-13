@@ -51,8 +51,8 @@ def test_planned_converter_not_implemented(client: TestClient) -> None:
     response = client.post(
         "/api/v1/jobs",
         files=[
-            ("converter_id", (None, "jpg-to-pdf")),
-            _multipart_file("a.jpg", b"\xff\xd8\xff\xe0" + b"0" * 100, "image/jpeg"),
+            ("converter_id", (None, "word-to-pdf")),
+            _multipart_file("a.docx", b"PK\x03\x04" + b"0" * 100, "image/jpeg"),
         ],
     )
     assert response.status_code == 501

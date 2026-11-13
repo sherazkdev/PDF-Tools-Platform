@@ -27,9 +27,9 @@ export const tools: ToolDefinition[] = [
     name: "JPG to PDF",
     category: "to-pdf",
     searchIntent: "Convert JPEG images to a single PDF",
-    title: "JPG to PDF Converter | ForgePDF",
+    title: "JPG to PDF Converter – Convert Images Online | ForgePDF",
     metaDescription:
-      "Combine JPG and JPEG images into one PDF. Reorder pages, set margins, and download a real PDF file.",
+      "Convert JPG images to PDF online. Upload multiple photos, arrange their order, choose page settings and download your PDF.",
     h1: "JPG to PDF Converter",
     shortDescription:
       "Turn one or more JPEG images into a polished PDF with layout controls.",
@@ -37,15 +37,16 @@ export const tools: ToolDefinition[] = [
     benefits: [
       "Combine multiple images in order",
       "Portrait or landscape page layout",
-      "Configurable margins",
+      "Configurable margins on A4 and Letter",
     ],
     limitations: [
       "Not a scan/OCR tool—images are placed as pages, not re-typeset as text.",
-      "Very large images may be downscaled to respect upload limits.",
+      "Fit-to-image mode does not add printable margins; use A4 or Letter for margins.",
+      "Re-encoding after EXIF rotation may slightly change quality; direct JPEG embed is used when possible.",
     ],
     relatedTools: related(["pdf-to-jpg", "word-to-pdf", "html-to-pdf"]),
-    indexable: false,
-    releaseStatus: "upcoming",
+    indexable: true,
+    releaseStatus: "live",
   },
   {
     slug: "word-to-pdf",

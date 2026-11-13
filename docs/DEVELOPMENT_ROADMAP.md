@@ -5,8 +5,8 @@
 | 0 | Environment audit | **Complete** |
 | 1 | Project foundation | **Complete** |
 | 2 | Shared conversion infrastructure | **Complete** |
-| 3 | JPG to PDF (first E2E) | **Next** |
-| 4 | PDF to JPG | Planned |
+| 3 | JPG to PDF (first E2E) | **Complete** |
+| 4 | PDF to JPG | **Next** |
 | 5 | Office to PDF | Planned |
 | 6 | HTML to PDF | Planned |
 | 7 | PDF to Word | Planned |

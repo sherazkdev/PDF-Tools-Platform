@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { siteConfig } from "@/lib/site";
+import { isToolIndexable } from "@/lib/seo-indexing";
 import { tools } from "@/lib/tools";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -16,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const toolEntries: MetadataRoute.Sitemap = tools
-    .filter((t) => t.indexable)
+    .filter((t) => isToolIndexable(t))
     .map((tool) => ({
       url: `${base}/${tool.slug}`,
       lastModified: new Date(),

@@ -35,6 +35,10 @@ class Settings(BaseSettings):
     rate_limit_jobs_per_minute: int = 30
     max_concurrent_jobs: int = 4
 
+    max_image_pixels: int = 50_000_000
+    max_image_dimension_px: int = 12_000
+    jpg_to_pdf_max_files: int = 50
+
     @field_validator("storage_root")
     @classmethod
     def normalize_storage_root(cls, value: str) -> str:

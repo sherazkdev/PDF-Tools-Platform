@@ -51,6 +51,7 @@ class JobService:
             )
 
         converter = self._registry.get_converter(converter_id)
+        settings = self._normalize_settings(converter, settings)
         self._storage.enforce_storage_budget()
 
         job_id = secrets.token_hex(16)
@@ -119,9 +120,17 @@ class JobService:
             output_metas = [
                 StoredFileMeta(
                     stored_name=p.name,
-                    original_name=p.name,
+                    original_name=(
+                        p.name
+                        if p.suffix.lower() != ".pdf"
+                        else "forgepdf-images.pdf"
+                    ),
                     size_bytes=p.stat().st_size,
-                    content_type="application/octet-stream",
+                    content_type=(
+                        "application/pdf"
+                        if p.suffix.lower() == ".pdf"
+                        else "application/octet-stream"
+                    ),
                 )
                 for p in outputs
             ]
@@ -203,3 +212,20 @@ class JobService:
         if not isinstance(data, dict):
             raise AppError("invalid_settings", "Settings must be a JSON object.", status_code=400)
         return data
+
+    def _normalize_settings(
+        self,
+        converter: Any,
+        settings: dict[str, Any] | None,
+    ) -> dict[str, Any]:
+        schema = converter.settings_schema()
+        if schema is None or settings is None:
+            return settings or {}
+        try:
+            return schema.model_validate(settings).model_dump()
+        except Exception as exc:
+            raise AppError(
+                "invalid_settings",
+                "Conversion settings are invalid.",
+                status_code=400,
+            ) from exc

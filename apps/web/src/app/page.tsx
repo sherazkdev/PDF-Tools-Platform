@@ -32,7 +32,7 @@ export default function HomePage() {
               href="/jpg-to-pdf"
               className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-800 hover:bg-slate-50"
             >
-              JPG to PDF (in development)
+              JPG to PDF
             </Link>
           </div>
           <div className="mt-10 max-w-xl">
