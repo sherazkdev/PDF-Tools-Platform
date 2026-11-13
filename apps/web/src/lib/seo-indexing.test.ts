@@ -12,9 +12,19 @@ describe("SEO indexing rules", () => {
     expect(jpg?.indexable).toBe(true);
   });
 
-  it("other tools stay non-indexable", () => {
-    const others = tools.filter((t) => t.slug !== "jpg-to-pdf");
-    expect(others.every((t) => !t.indexable)).toBe(true);
+  it("only live tools are marked indexable in config", () => {
+    for (const t of tools) {
+      if (t.releaseStatus === "live") {
+        expect(t.indexable).toBe(true);
+      } else {
+        expect(t.indexable).toBe(false);
+      }
+    }
+  });
+
+  it("pdf-to-jpg is live", () => {
+    const pdf = getToolBySlug("pdf-to-jpg");
+    expect(pdf?.releaseStatus).toBe("live");
   });
 
   it("respects NEXT_PUBLIC_SITE_INDEX gate", () => {

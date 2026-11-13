@@ -26,7 +26,6 @@ PLANNED_CATALOG: list[ConverterDescriptor] = [
     _planned_converter("powerpoint-to-pdf", "PowerPoint to PDF", ("pptx", "ppt"), "pdf"),
     _planned_converter("excel-to-pdf", "Excel to PDF", ("xlsx", "xls"), "pdf"),
     _planned_converter("html-to-pdf", "HTML to PDF", ("html", "htm"), "pdf"),
-    _planned_converter("pdf-to-jpg", "PDF to JPG", ("pdf",), "jpg"),
     _planned_converter("pdf-to-word", "PDF to Word", ("pdf",), "docx"),
     _planned_converter("pdf-to-powerpoint", "PDF to PowerPoint", ("pdf",), "pptx"),
     _planned_converter("pdf-to-excel", "PDF to Excel", ("pdf",), "xlsx"),
@@ -95,10 +94,12 @@ def get_converter_registry() -> ConverterRegistry:
     if _registry is None:
         _registry = ConverterRegistry()
         from pdf_tools_api.converters.jpg_to_pdf import JpgToPdfConverter
+        from pdf_tools_api.converters.pdf_to_jpg import PdfToJpgConverter
         from pdf_tools_api.converters.test_fixture import TestFixtureConverter
         from pdf_tools_api.core.config import get_settings
 
         _registry.register(JpgToPdfConverter())
+        _registry.register(PdfToJpgConverter())
 
         settings = get_settings()
         if settings.enable_test_converter or settings.app_env == "test":

@@ -39,6 +39,10 @@ class Settings(BaseSettings):
     max_image_dimension_px: int = 12_000
     jpg_to_pdf_max_files: int = 50
 
+    pdf_max_pages: int = 200
+    pdf_max_selected_pages: int = 50
+    pdf_max_render_pixels: int = 40_000_000
+
     @field_validator("storage_root")
     @classmethod
     def normalize_storage_root(cls, value: str) -> str:

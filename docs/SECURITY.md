@@ -18,7 +18,15 @@ Configure matching limits on the **reverse proxy** (e.g. nginx `client_max_body_
 
 ## Planned tools
 
-`POST /jobs` with `jpg-to-pdf` etc. returns **501** — no job is created and no fake output is produced.
+`POST /jobs` with unimplemented converter IDs returns **501** — no job is created and no fake output is produced.
+
+**Live:** `jpg-to-pdf`, `pdf-to-jpg`.
+
+### PDF to JPG limits
+
+- `pdf_max_pages` (default 200), `pdf_max_selected_pages` (50), `pdf_max_render_pixels` (40M per page)
+- Encrypted PDFs rejected (`pypdf` metadata; no password guessing)
+- PDFium rendered **one page at a time**; avoid concurrent PDFium use across threads in one process
 
 ## Test converter
 

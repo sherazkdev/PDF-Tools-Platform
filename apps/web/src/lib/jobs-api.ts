@@ -122,6 +122,29 @@ export async function getJob(jobId: string, accessToken: string): Promise<JobDet
   return response.json() as Promise<JobDetail>;
 }
 
+export interface PdfInspectResult {
+  page_count: number;
+  encrypted: boolean;
+}
+
+export async function inspectPdfForJpg(file: File): Promise<PdfInspectResult> {
+  const form = new FormData();
+  form.append("file", file);
+  let response: Response;
+  try {
+    response = await fetch(`${apiBase()}/api/v1/tools/pdf-to-jpg/inspect`, {
+      method: "POST",
+      body: form,
+    });
+  } catch {
+    throw new JobsApiError("Network error while inspecting the PDF.", "network_error");
+  }
+  if (!response.ok) {
+    throw await parseError(response);
+  }
+  return response.json() as Promise<PdfInspectResult>;
+}
+
 export async function downloadJobOutput(
   jobId: string,
   accessToken: string,

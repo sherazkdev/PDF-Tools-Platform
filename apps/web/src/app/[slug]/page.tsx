@@ -11,7 +11,7 @@ interface ToolPageProps {
 
 export function generateStaticParams() {
   return tools
-    .filter((tool) => tool.slug !== "jpg-to-pdf")
+    .filter((tool) => tool.slug !== "jpg-to-pdf" && tool.slug !== "pdf-to-jpg")
     .map((tool) => ({ slug: tool.slug }));
 }
 

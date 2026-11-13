@@ -34,6 +34,12 @@ export default function HomePage() {
             >
               JPG to PDF
             </Link>
+            <Link
+              href="/pdf-to-jpg"
+              className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-800 hover:bg-slate-50"
+            >
+              PDF to JPG
+            </Link>
           </div>
           <div className="mt-10 max-w-xl">
             <ApiStatus />
@@ -45,7 +51,7 @@ export default function HomePage() {
         <h2 className="text-2xl font-bold text-slate-900">Convert to PDF</h2>
         <p className="mt-2 max-w-2xl text-slate-600">
           Create PDFs from images, Microsoft Office files, and HTML. Tools below are listed with
-          honest release status—none are marked live until end-to-end conversion is verified.
+          honest release status—only tools marked Available are verified end-to-end.
         </p>
         <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {toolsByCategory["to-pdf"].map((tool) => (

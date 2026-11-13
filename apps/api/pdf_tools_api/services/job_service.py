@@ -129,6 +129,10 @@ class JobService:
                     content_type=(
                         "application/pdf"
                         if p.suffix.lower() == ".pdf"
+                        else "application/zip"
+                        if p.suffix.lower() == ".zip"
+                        else "image/jpeg"
+                        if p.suffix.lower() in (".jpg", ".jpeg")
                         else "application/octet-stream"
                     ),
                 )
@@ -180,7 +184,7 @@ class JobService:
             finally:
                 self._storage.delete_job(record.job_id)
 
-    def resolve_download(self, job_id: str, access_token: str) -> tuple[Path, str]:
+    def resolve_download(self, job_id: str, access_token: str) -> tuple[Path, str, str]:
         record = self.get_job_for_client(job_id, access_token)
         if record.status == JobStatus.EXPIRED:
             raise AppError("job_expired", "This job has expired.", status_code=410)
@@ -196,7 +200,8 @@ class JobService:
         path = output_dir(self._storage.root, job_id) / meta.stored_name
         if not path.is_file():
             raise AppError("no_output", "Output file is missing.", status_code=404)
-        return path, meta.original_name
+        media_type = meta.content_type or "application/octet-stream"
+        return path, meta.original_name, media_type
 
     def parse_settings_json(self, raw: str | None) -> dict[str, Any]:
         if not raw:

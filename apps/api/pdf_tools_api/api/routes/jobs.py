@@ -40,9 +40,11 @@ def download_job_output(
     access_token: str | None = Header(default=None, alias="X-Job-Access-Token"),
 ) -> FileResponse:
     job_id = validate_job_id(job_id)
-    path, download_name = get_job_service().resolve_download(job_id, access_token or "")
+    path, download_name, media_type = get_job_service().resolve_download(
+        job_id, access_token or ""
+    )
     return FileResponse(
         path,
         filename=download_name,
-        media_type="application/octet-stream",
+        media_type=media_type,
     )

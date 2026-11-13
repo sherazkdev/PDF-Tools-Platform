@@ -14,6 +14,7 @@ def test_registry_lists_planned_converters() -> None:
     descriptors = registry.list_descriptors()
     ids = {d.converter_id for d in descriptors}
     assert "jpg-to-pdf" in ids
+    assert "pdf-to-jpg" in ids
     assert "test-fixture" in ids
 
 

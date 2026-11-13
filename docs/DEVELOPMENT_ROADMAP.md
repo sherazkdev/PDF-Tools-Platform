@@ -6,7 +6,7 @@
 | 1 | Project foundation | **Complete** |
 | 2 | Shared conversion infrastructure | **Complete** |
 | 3 | JPG to PDF (first E2E) | **Complete** |
-| 4 | PDF to JPG | **Next** |
+| 4 | PDF to JPG | **Complete** |
 | 5 | Office to PDF | Planned |
 | 6 | HTML to PDF | Planned |
 | 7 | PDF to Word | Planned |
