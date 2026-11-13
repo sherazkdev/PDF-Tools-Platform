@@ -30,6 +30,9 @@ build/
 uploads/
 var/storage/
 **/var/storage/
+**/var/storage-test/
+apps/web/test-results/
+apps/web/playwright-report/
 tmp/
 *.pdf
 !tests/fixtures/**
